@@ -1,4 +1,4 @@
-module simple-https-cgi-server
+module github.com/zapateo/simple-https-cgi-server
 
 go 1.19
 
