@@ -51,6 +51,7 @@ func main() {
 		http.FileServer(http.Dir("./")).ServeHTTP(w, r)
 	})
 
+	color.HiGreen("Listening on %s", addr)
 	color.HiGreen("I'm ready 🙂")
 
 	err = s.ListenAndServeTLS("", "")
