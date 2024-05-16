@@ -3,25 +3,36 @@ package main
 import (
 	"crypto/tls"
 	"flag"
+	"fmt"
 	"log"
 	"net/http"
 	"net/http/cgi"
+	"os"
 	"strings"
 
 	"github.com/fatih/color"
 )
 
+const version = "v0.1.0"
+
 func main() {
 
 	var (
-		addr     string
-		certFile string
-		keyFile  string
+		addr         string
+		certFile     string
+		keyFile      string
+		printVersion bool
 	)
 	flag.StringVar(&addr, "address", "localhost:7070", "")
 	flag.StringVar(&certFile, "cert-file", "cert.pem", "")
 	flag.StringVar(&keyFile, "key-file", "key.pem", "")
+	flag.BoolVar(&printVersion, "version", false, "")
 	flag.Parse()
+
+	if printVersion {
+		fmt.Printf("%s %s\n", os.Args[0], version)
+		os.Exit(0)
+	}
 
 	cert, err := tls.LoadX509KeyPair(certFile, keyFile)
 	if err != nil {
